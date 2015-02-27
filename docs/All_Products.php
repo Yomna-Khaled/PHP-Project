@@ -11,13 +11,17 @@
                 <td><b>Action</td>		
   	</tr>
 <?php
+
 function __autoload($classname) {
     $filename =  $classname .".php";
     include_once($filename);
-                               }
+    }
+ 
+
 	$obj = ORM::getInstance();
 	$obj->setTable('products');
 	$products = $obj->selectAll();
+  
 	for ($i = 0 ; $i < count($products) ; $i++){
 ?>        
           <tr style="text-align:center">

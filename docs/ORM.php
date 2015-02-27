@@ -56,7 +56,7 @@ class ORM {
         return $users;
     
     }
-//////////////////
+
     function selectwhere($id){
     	$query = "select * from $this->table where id=";
         $query .= $id.';';
@@ -81,25 +81,25 @@ class ORM {
      
         $state = $this->dbconn->query($query);
        
-        return $query;   
+        return $state;   
     }
 
 
 
-       function update($data){
-        $query = "update  $this->table set ";
-        foreach ($data as $col => $value) {
-            $query .= $col."= '".$value."', ";   
-        }
-        $query[strlen($query)-2]=" ";
-        $state = $this->dbconn->query($query);
-        if(! $state){
+     function update($data,$id)
+     {
+         $query = "update $this->table set ";
+         foreach ($data as $col => $value) {
+             $query .= $col."= '".$value."', ";
+         }
+          $query[strlen($query)-2]=" ";
+          $query.='where id='.$id.';';
+          $state = $this->dbconn->query($query);
+          if(! $state){ 
             return $this->dbconn->error;
-        }
-        
-        return $query;   
-    }
-
+         }
+        return $query;
+     }
 
  }
 
